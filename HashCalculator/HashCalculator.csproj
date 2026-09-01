@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>hsh.ico</ApplicationIcon>
+
+    <!-- تنظیمات جادویی کاهش حجم Native AOT -->
+    <PublishAot>true</PublishAot>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <OptimizationPreference>Size</OptimizationPreference>
+    <StripSymbols>true</StripSymbols>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="hsh.ico" />
+  </ItemGroup>
+
+</Project>

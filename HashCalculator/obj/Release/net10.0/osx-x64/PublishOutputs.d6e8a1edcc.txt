@@ -1,0 +1,2 @@
+C:\Users\__\source\repos\HashCalculator\HashCalculator\bin\Release\net10.0\osx-x64\publish\HashCalculator.pdb
+C:\Users\__\source\repos\HashCalculator\HashCalculator\bin\Release\net10.0\osx-x64\publish\HashCalculator
