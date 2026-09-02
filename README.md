@@ -27,19 +27,19 @@ A ultra-lightweight, blazing-fast, and cross-platform CLI tool to compute and co
 
 ---
 
-## 📥 Downloads (v1.0.2)
+## 📥 Downloads (v1.0.3)
 
-You can download the pre-compiled standalone binary for your OS directly from the table below or via the [**Releases**](https://github.com/Erfan4700/Hash-Calculator/releases/tag/v1.0.2) section:
+You can download the pre-compiled standalone binary for your OS directly from the table below or via the [**Releases**](https://github.com/Erfan4700/Hash-Calculator/releases/tag/v1.0.3) section:
 
 | Platform | Architecture | File & Direct Download Link | Size | SHA-256 Checksum |
 | :--- | :--- | :--- | :--- | :--- |
-| **Windows** | x64 (Standard 64-bit) | [HashCalculator-Windows-x64.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-Windows-x64.exe) | `1.30 MB` | `d40663a9b44b4629e841873da0348f315d21f4108614bbb1bceeb972a17b2ba2` |
-| **Windows** | x86 (Legacy 32-bit) | [HashCalculator-Windows-x86-32bit.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-Windows-x86-32bit.exe) | `1.16 MB` | `480f2caa9e3a39b41802a36d829f59be12fa7d8f862a49627c16f203f2701d71` |
-| **Windows** | ARM64 | [HashCalculator-Windows-ARM64.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-Windows-ARM64.exe) | `1.32 MB` | `3a9190fc9ee763f8b22449166902997fe4cd197953bcbff9643ddd6abcbe983f` |
-| **Linux** | x64 (Standard Linux) | [HashCalculator-Linux-x64](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-Linux-x64) | `1.30 MB` | `4e81d5b888233e7d55569b7cc8235398ee3f9e028e75cee64623ed05675b2e2c` |
-| **Linux** | ARM64 (Raspberry Pi, etc.) | [HashCalculator-Linux-ARM64](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-Linux-ARM64) | `1.38 MB` | `489819b4902e91de00050e50c1c9f1684e9d0960beb6f75071c9abc2094ecf2c` |
-| **macOS** | Apple Silicon (M1/M2/M3/M4) | [HashCalculator-macOS-AppleSilicon](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-macOS-AppleSilicon) | `1.18 MB` | `751bd894db990870ccbd4ded10f4c3559d1365cb040f3d56608c03066a4afc2c` |
-| **macOS** | Intel | [HashCalculator-macOS-Intel](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.2/HashCalculator-macOS-Intel) | `1.20 MB` | `f9aab5eb8179e2782d5e8f6859be8e8be56b401682587dc677b8cfedbe6dfb37` |
+| **Windows** | x64 (Standard 64-bit) | [HashCalculator-Windows-x64.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-Windows-x64.exe) | `1.30 MB` | `ae8a0790e30de13a960bb8dc0f773e3533f2bcd2803f7d193857ad3f7bda3d51` |
+| **Windows** | x86 (Legacy 32-bit) | [HashCalculator-Windows-x86-32bit.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-Windows-x86-32bit.exe) | `1.16 MB` | `65005da93a1fe8129c68c0568732c3fe906e1f6d292e5b5e6c04488cc51b24ba` |
+| **Windows** | ARM64 | [HashCalculator-Windows-ARM64.exe](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-Windows-ARM64.exe) | `1.32 MB` | `58a719d99badb1fba40cfebea78db54d9515572dcd09ef671c250dad9c73d4b5` |
+| **Linux** | x64 (Standard Linux) | [HashCalculator-Linux-x64](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-Linux-x64) | `1.30 MB` | `50b81a50edb9e1d5ee3d62b2aef0d1abc008765aebe0c6bb17dd18969707bdcf` |
+| **Linux** | ARM64 (Raspberry Pi, etc.) | [HashCalculator-Linux-ARM64](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-Linux-ARM64) | `1.38 MB` | `0b9b64e44575973b0c4c248e7545ec69904b17e8ce7c4ec7660736ba37c18a25` |
+| **macOS** | Apple Silicon (M1/M2/M3/M4) | [HashCalculator-macOS-AppleSilicon](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-macOS-AppleSilicon) | `1.19 MB` | `04cb2808608c60d8504fa6a498caa3b33051a36472fa0b49a0a529330d0512e9` |
+| **macOS** | Intel | [HashCalculator-macOS-Intel](https://github.com/Erfan4700/Hash-Calculator/releases/download/v1.0.3/HashCalculator-macOS-Intel) | `1.21 MB` | `c341a6ff7268958abf30f2b5a30e1b2b0e9808b6fe976f44199ab5be2253d7f9` |
 
 ---
 
