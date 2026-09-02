@@ -7,7 +7,16 @@
     <Nullable>enable</Nullable>
     <ApplicationIcon>hsh.ico</ApplicationIcon>
 
-    <!-- تنظیمات جادویی کاهش حجم Native AOT -->
+    <!-- اطلاعات نسخه و پکیج -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Authors>Erfan</Authors>
+    <Company>HashApp</Company>
+    <Product>Hash Calculator</Product>
+    <Description>High-performance cross-platform SHA-256 hash calculator and validator.</Description>
+
+    <!-- تنظیمات پیشرفته Native AOT برای حجم حداقلی (زیر ۳ مگابایت) -->
     <PublishAot>true</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
     <OptimizationPreference>Size</OptimizationPreference>

@@ -1,0 +1,275 @@
+name: Build & Release Native AOT
+
+on:
+  push:
+    branches: ["main", "master"]
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+
+          # ============================================================
+          # WINDOWS
+          # ============================================================
+
+          # Windows x64
+          - os: windows-latest
+            target: win-x64
+            artifact_name: HashCalculator-Windows-x64.exe
+            publish_binary: HashCalculator.exe
+
+          # Windows ARM64
+          - os: windows-latest
+            target: win-arm64
+            artifact_name: HashCalculator-Windows-ARM64.exe
+            publish_binary: HashCalculator.exe
+
+          # Windows 32-bit x86
+          - os: windows-latest
+            target: win-x86
+            artifact_name: HashCalculator-Windows-x86-32bit.exe
+            publish_binary: HashCalculator.exe
+
+
+          # ============================================================
+          # LINUX
+          # ============================================================
+
+          # Linux x64
+          - os: ubuntu-24.04
+            target: linux-x64
+            artifact_name: HashCalculator-Linux-x64
+            publish_binary: HashCalculator
+
+          # Linux ARM64
+          #
+          # IMPORTANT:
+          # Build natively on an ARM64 GitHub runner.
+          # This avoids the arm64 APT repository problem that happened
+          # when using dpkg --add-architecture arm64 on ubuntu-latest.
+          #
+          - os: ubuntu-24.04-arm
+            target: linux-arm64
+            artifact_name: HashCalculator-Linux-ARM64
+            publish_binary: HashCalculator
+
+
+          # ============================================================
+          # MACOS
+          # ============================================================
+
+          # macOS Apple Silicon
+          - os: macos-latest
+            target: osx-arm64
+            artifact_name: HashCalculator-macOS-AppleSilicon
+            publish_binary: HashCalculator
+
+          # macOS Intel
+          - os: macos-15-intel
+            target: osx-x64
+            artifact_name: HashCalculator-macOS-Intel
+            publish_binary: HashCalculator
+
+
+    steps:
+
+      # ================================================================
+      # CHECKOUT
+      # ================================================================
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+
+      # ================================================================
+      # .NET
+      # ================================================================
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+
+      # ================================================================
+      # LINUX DEPENDENCIES - x64
+      # ================================================================
+
+      - name: Install Linux Dependencies - x64
+        if: runner.os == 'Linux' && matrix.target == 'linux-x64'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            lld \
+            llvm \
+            zlib1g-dev
+
+
+      # ================================================================
+      # LINUX DEPENDENCIES - ARM64
+      # ================================================================
+      #
+      # This runner is already ARM64:
+      #
+      # ubuntu-24.04-arm
+      #
+      # Therefore we DO NOT use:
+      #
+      #   dpkg --add-architecture arm64
+      #
+      # and we DO NOT attempt to download ARM64 packages from
+      # security.ubuntu.com as an x64 machine.
+      #
+      # ================================================================
+
+      - name: Install Linux Dependencies - ARM64
+        if: runner.os == 'Linux' && matrix.target == 'linux-arm64'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            lld \
+            llvm \
+            zlib1g-dev
+
+
+      # ================================================================
+      # PUBLISH - WINDOWS
+      # ================================================================
+
+      - name: Publish Native AOT - Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          dotnet publish `
+            -c Release `
+            -r ${{ matrix.target }} `
+            --self-contained true
+
+
+      # ================================================================
+      # PUBLISH - LINUX
+      # ================================================================
+
+      - name: Publish Native AOT - Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          dotnet publish \
+            -c Release \
+            -r ${{ matrix.target }} \
+            --self-contained true
+
+
+      # ================================================================
+      # PUBLISH - MACOS
+      # ================================================================
+
+      - name: Publish Native AOT - macOS
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          dotnet publish \
+            -c Release \
+            -r ${{ matrix.target }} \
+            --self-contained true
+
+
+      # ================================================================
+      # PREPARE BINARY
+      # ================================================================
+
+      - name: Prepare Binary Output
+        shell: bash
+        run: |
+          set -e
+
+          mkdir -p dist
+
+          PUBLISHED_BINARY=$(find . \
+            -type f \
+            -path "*/bin/Release/*/${{ matrix.target }}/publish/${{ matrix.publish_binary }}" \
+            -print -quit)
+
+          if [ -z "$PUBLISHED_BINARY" ]; then
+            echo "ERROR: Published binary not found!"
+            echo
+            echo "Expected:"
+            echo "*/bin/Release/*/${{ matrix.target }}/publish/${{ matrix.publish_binary }}"
+            echo
+            echo "Available publish directories:"
+            find . -type d -name publish -print
+            exit 1
+          fi
+
+          echo "Found binary:"
+          echo "$PUBLISHED_BINARY"
+
+          cp "$PUBLISHED_BINARY" \
+            "dist/${{ matrix.artifact_name }}"
+
+
+      # ================================================================
+      # UPLOAD ARTIFACT
+      # ================================================================
+
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: dist/${{ matrix.artifact_name }}
+          if-no-files-found: error
+
+
+  # ==================================================================
+  # RELEASE
+  # ==================================================================
+
+  release:
+    name: Create GitHub Release
+    needs: build
+
+    if: >
+      startsWith(github.ref, 'refs/tags/')
+      || github.event_name == 'workflow_dispatch'
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # ================================================================
+      # DOWNLOAD ALL ARTIFACTS
+      # ================================================================
+
+      - name: Download all built artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release_files
+          merge-multiple: true
+
+
+      # ================================================================
+      # CREATE RELEASE
+      # ================================================================
+
+      - name: Create Release & Upload Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: release_files/*
