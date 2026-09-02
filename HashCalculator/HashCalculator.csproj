@@ -7,16 +7,14 @@
     <Nullable>enable</Nullable>
     <ApplicationIcon>hsh.ico</ApplicationIcon>
 
-    <!-- اطلاعات نسخه و پکیج -->
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2</FileVersion>
     <Authors>Erfan</Authors>
     <Company>HashApp</Company>
     <Product>Hash Calculator</Product>
     <Description>High-performance cross-platform SHA-256 hash calculator and validator.</Description>
 
-    <!-- تنظیمات پیشرفته Native AOT برای حجم حداقلی (زیر ۳ مگابایت) -->
     <PublishAot>true</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
     <OptimizationPreference>Size</OptimizationPreference>
